@@ -11,7 +11,19 @@ export const RestaurantHome=()=>{
         <ul className="menu">
         <li><Link to="/resmenu">Menu</Link></li>
           <li><Link to="/reshome">Order History</Link></li>
-          <li><Link to="/resorders">Ongoing Orders</Link></li>        
+          <li><Link to="/resorders">Ongoing Orders</Link></li>   
+          <li>
+            <Link to="/menu-management">Menu Management</Link>
+          </li>
+          <li>
+            <Link to="/order-management">Order Management</Link>
+          </li>
+          <li>
+            <Link to="/order-history">Order History</Link>
+          </li>
+          <li>
+            <Link to="/ongoing-orders">Ongoing Orders</Link>
+          </li>     
         </ul>
       </nav>
     </div>
