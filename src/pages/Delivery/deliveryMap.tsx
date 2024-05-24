@@ -4,6 +4,7 @@ import { Polyline } from '@react-google-maps/api';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from './../../firebase';
 import './Delivery.css';
+import calculateDeliveryCost from './DeliveryCostCalculator';
 
 interface Delivery {
   id: string;
@@ -23,6 +24,7 @@ export const DeliveryMap = () => {
   const [selectedDelivery, setSelectedDelivery] = useState<Delivery | null>(null);
   const [locations, setLocations] = useState<{ lat: number; lng: number; label: string }[]>([]);
   const [distance, setDistance] = useState<number | null>(null);
+  const [deliveryCost, setDeliveryCost] = useState<number | null>(null);
   const originRef = useRef<HTMLInputElement>(null);
   const destiantionRef = useRef<HTMLInputElement>(null);
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
@@ -48,7 +50,15 @@ export const DeliveryMap = () => {
         { lat: pick_loc.latitude, lng: pick_loc.longitude, label: 'Pick-Up Location' },
         { lat: drop_loc.latitude, lng: drop_loc.longitude, label: 'Drop-Off Location' }
       ]);
-      calculateDistance(pick_loc, drop_loc);
+      
+      const calculateAndSetDeliveryCost = async () => {
+        const { distance, cost } = await calculateDeliveryCost(pick_loc, drop_loc);
+        setDistance(distance);
+        setDeliveryCost(cost);
+        console.log(distance, cost)
+      };
+      
+      calculateAndSetDeliveryCost();
     }
   }, [selectedDelivery]);
 
@@ -57,41 +67,6 @@ export const DeliveryMap = () => {
     const delivery = deliveries.find(delivery => delivery.id === selectedId) || null;
     setSelectedDelivery(delivery);
   };
-
-  const calculateDistance = (pickLoc: { latitude: number; longitude: number }, dropLoc: { latitude: number; longitude: number }) => {
-    const R = 6371; // Radius of the Earth in kilometers
-    const dLat = (dropLoc.latitude - pickLoc.latitude) * (Math.PI / 180);
-    const dLon = (dropLoc.longitude - pickLoc.longitude) * (Math.PI / 180);
-    const lat1 = pickLoc.latitude * (Math.PI / 180);
-    const lat2 = dropLoc.latitude * (Math.PI / 180);
-
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Distance in kilometers
-
-    setDistance(distance);
-  };
-
-  // async function calculateRoute() {
-  //   if (!originRef.current || !destiantionRef.current || originRef.current.value === "" || destiantionRef.current.value === "") {
-  //     return;
-  //   }
-  //   const directionsService = new window.google.maps.DirectionsService();
-  //   const results = await directionsService.route({
-  //     origin: originRef.current.value,
-  //     destination: destiantionRef.current.value,
-  //     travelMode: window.google.maps.TravelMode.DRIVING,
-  //   });
-  //   setDirectionsResponse(results);
-
-  //   // Extract the route path from the results and update state
-  //   const routePath = results?.routes[0]?.overview_path;
-  //   if (routePath) {
-  //     const routeCoordinates = routePath.map(point => ({ lat: point.lat(), lng: point.lng() }));
-  //     setFlightRoute(routeCoordinates);
-  //   }
-  // }
 
   return (
     <div className="delivery-map-container">
@@ -107,23 +82,21 @@ export const DeliveryMap = () => {
 
       {selectedDelivery && (
         <div className="delivery-info">
-          {/* <p><strong>Order:</strong> {selectedDelivery.order}</p> */}
-          <p><strong>Delivery Cost:</strong> ${selectedDelivery.delivery_cost}</p>
+          <p><strong>Delivery Cost:</strong> ${deliveryCost !== null ? deliveryCost.toFixed(2) : 'Calculating...'}</p>
           <p><strong>Delivery Date and Time:</strong> {new Date(selectedDelivery.delivery_date_time).toLocaleString()}</p>
           <p><strong>Delivery Status:</strong> {selectedDelivery.delivery_status}</p>
-          {/* <p><strong>Drone Assigned:</strong> {selectedDelivery.drone_assigned}</p> */}
           <p><strong>Item Picked:</strong> {selectedDelivery.is_item_picked ? 'Yes' : 'No'}</p>
           <p><strong>Item Handed:</strong> {selectedDelivery.is_item_handed ? 'Yes' : 'No'}</p>
-          {distance && <p><strong>Distance:</strong> {distance.toFixed(2)} km</p>}
+          {distance !== null && <p><strong>Distance:</strong> {distance.toFixed(2)} km</p>}
         </div>
       )}
 
       {locations.length > 0 && (
-        <APIProvider apiKey={'AIzaSyCg7sLR3nrC8cAwg5Awyhs2CHQG68aC3fg'}>
+        <APIProvider apiKey={'AIzaSyCcrZMWt626KxUo-w5l4UR2bHPm16XFceI'}>
           {deliveries.length === 0 ? (
-            // Display a loading indicator while fetching deliveries
             <p>Loading deliveries...</p>
           ) : (
+            
             <Map
               defaultZoom={13}
               defaultCenter={locations[0]}
@@ -145,7 +118,6 @@ export const DeliveryMap = () => {
                   options={{ geodesic: true, strokeColor: '#FF0000', strokeWeight: 4, strokeOpacity: 1 }}
                 />
               )}
-              {/* Render the route */}
               {directionsResponse && (
                 <Polyline
                   path={directionsResponse.routes[0].overview_path.map((p: any) => ({
@@ -167,9 +139,3 @@ export const DeliveryMap = () => {
     </div>
   );
 };
-
-
-function setFlightRoute(routeCoordinates: { lat: number; lng: number; }[]) {
-  throw new Error('Function not implemented.');
-}
-
