@@ -18,6 +18,11 @@ import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 import toast from "react-hot-toast";
 import Empty from "../Empty";
 
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import StripeContainer from "../payments/StripeContainer";
+
+
 const initialState = {
   name: "",
   phone: "",
@@ -117,6 +122,7 @@ function OrdersList() {
               Order Now For{" "}
               <span className="underline"> {formatCurrency(totalPrice)}</span>
             </Button>
+            <StripeContainer />
           </form>
         </div>
 
@@ -128,11 +134,11 @@ function OrdersList() {
                 className="flex items-center justify-between border-b border-darkGray  py-[10px]"
               >
                 <p className="text-lightGray">
-                  <span className="text-sm">x{item.qty}</span> {item.title}
+                  <span className="text-sm">x{item.item_quantity}</span> {item.item_name}
                 </p>
                 <div className="flex items-center gap-[20px]">
-                  <span className="text-sm">{formatCurrency(item.price)}</span>
-                  <UpdateItemQuantity id={item.id} currentQuantity={item.qty} />
+                  <span className="text-sm">{formatCurrency(item.item_price)}</span>
+                  <UpdateItemQuantity id={item.id} currentQuantity={item.item_quantity} />
                   <Button onClick={() => dispatch(deleteItem(item.id))}>
                     Delete
                   </Button>
