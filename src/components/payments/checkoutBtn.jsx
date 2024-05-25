@@ -8,7 +8,7 @@ const CheckoutButton = () => {
         const { error } = await stripe.redirectToCheckout({
             lineItems: [
                 {
-                    price: 'price_id', // Replace with your price ID
+                    price: 'price_1PKHL7FBa9MFKoRmypGUOTdg', // Replace with your price ID
                     quantity: 1,
                 },
             ],
