@@ -11,7 +11,10 @@ const initialState = {
 export const getAllMenuItems = createAsyncThunk("menuItems/fetch", async () => {
   try {
     const querySnapshot = await getDocs(collection(firestore, "items"));
-    const items = querySnapshot.docs.map((doc) => doc.data());
+    const items = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
     console.log(items)
     return items;
   } catch (error) {
