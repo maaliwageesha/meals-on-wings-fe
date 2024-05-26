@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, updateDoc, doc, query, where } from 'firebase/firestore';
 import { firestore } from './../../firebase';
-import PopupMessage from './PopupMessage'; // Import the PopupMessage component
+import PopupMessage from './PopupMessage';
+import './DroneManagement.css';
 
 const DronesInUse = () => {
   const [dronesInUse, setDronesInUse] = useState([]);
@@ -10,7 +11,11 @@ const DronesInUse = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const circulatingDronesQuerySnapshot = await getDocs(collection(firestore, 'circulating_drones'));
+      const circulatingDronesQuery = query(
+        collection(firestore, 'circulating_drones'),
+        where('available', '==', true)
+      );
+      const circulatingDronesQuerySnapshot = await getDocs(circulatingDronesQuery);
       const circulatingDronesData = circulatingDronesQuerySnapshot.docs.map(doc => ({
         ...doc.data(),
         id: doc.data().id.id.split('/').pop(), // Extract the document ID from the reference path
@@ -38,20 +43,19 @@ const DronesInUse = () => {
     try {
       const drone = dronesInUse.find(d => d.docId === docId);
 
-      // Convert the selected ID to a Firestore reference
       const droneRef = doc(firestore, 'drone_details', drone.id);
       const droneDataToSave = {
         ...drone,
-        id: droneRef, // Save the reference instead of the plain ID
+        id: droneRef,
       };
 
-      delete droneDataToSave.docId; // Remove the local docId before saving
+      delete droneDataToSave.docId;
 
       const circulatingDroneRef = doc(firestore, 'circulating_drones', docId);
       await updateDoc(circulatingDroneRef, droneDataToSave);
 
       setMessage('Update successful!');
-      setTimeout(() => setMessage(''), 3000); // Clear the message after 3 seconds
+      setTimeout(() => setMessage(''), 3000);
     } catch (error) {
       setMessage(`Error updating document: ${error.message}`);
     }
@@ -62,12 +66,10 @@ const DronesInUse = () => {
       const circulatingDroneRef = doc(firestore, 'circulating_drones', docId);
       await updateDoc(circulatingDroneRef, { available: false });
 
-      setDronesInUse(dronesInUse.map(d =>
-        d.docId === docId ? { ...d, available: false } : d
-      ));
+      setDronesInUse(dronesInUse.filter(d => d.docId !== docId));
 
       setMessage('Drone removed from circulation!');
-      setTimeout(() => setMessage(''), 3000); // Clear the message after 3 seconds
+      setTimeout(() => setMessage(''), 3000);
     } catch (error) {
       setMessage(`Error updating document: ${error.message}`);
     }
@@ -81,17 +83,20 @@ const DronesInUse = () => {
       <table>
         <thead>
           <tr>
+            <th>Drone ID</th>
             <th>Assigned</th>
             <th>Charging Status</th>
             <th>Current Location</th>
-            <th>Remaining Battery</th>
-            <th>Drone ID</th>
+            <th>Remaining Battery</th>            
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {dronesInUse.map(drone => (
             <tr key={drone.docId}>
+              <td>
+                {drone.id}
+              </td>
               <td>
                 <input
                   type="checkbox"
@@ -121,21 +126,8 @@ const DronesInUse = () => {
                 />
               </td>
               <td>
-                <select
-                  value={drone.id}
-                  onChange={(e) => handleEdit(drone.docId, 'id', e.target.value)}
-                >
-                  <option value="">Select Drone</option>
-                  {droneDetails.map(droneDetail => (
-                    <option key={droneDetail.id} value={droneDetail.id}>
-                      {droneDetail.id}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>
-                <button onClick={() => handleSave(drone.docId)}>Save</button>
-                <button onClick={() => handleRemoveFromCirculation(drone.docId)}>Remove from circulation</button>
+                <button className="table-button save-button" onClick={() => handleSave(drone.docId)}>Save</button>
+                <button className="table-button remove-button" onClick={() => handleRemoveFromCirculation(drone.docId)}>Recall</button>
               </td>
             </tr>
           ))}

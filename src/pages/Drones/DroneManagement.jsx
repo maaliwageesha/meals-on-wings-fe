@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import DroneDetails from './DroneDetails';
 import DronesInUse from './DronesInUse';
+import TrackDrones from './TrackDrones'
 import './DroneManagement.css';
 
 export const DroneManagement = () => {
@@ -13,6 +14,8 @@ export const DroneManagement = () => {
         return <DroneDetails />;
       case 'dronesInUse':
         return <DronesInUse />;
+      case 'trackDrones':
+        return <TrackDrones />
       default:
         return null;
     }
@@ -23,7 +26,8 @@ export const DroneManagement = () => {
       <div className="menu">
         <button onClick={() => setSelectedOption('droneDetails')}>Drone Details</button>
         <button onClick={() => setSelectedOption('dronesInUse')}>Drones In Use</button>
-        <button onClick={() => setSelectedOption('dronesInUse')}>Charging Stations</button>
+        <button onClick={() => setSelectedOption('trackDrones')}>Track Drones</button>
+        {/* <button onClick={() => setSelectedOption('dronesInUse')}>Charging Stations</button> */}
       </div>
       <div className="content">
         {renderContent()}

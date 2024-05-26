@@ -110,3 +110,127 @@ button {
   background: #555;
 }
 
+.table-button {
+  padding: 8px 12px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.table-button.save-button {
+  background-color: #2195f3c6;
+  color: white;
+  margin: 10px;
+}
+
+.table-button.remove-button {
+  background-color: #f44336d0;
+  color: white;
+  margin: 10px;
+}
+
+.table-button.add-button {
+  background-color: #4caf4fc6;
+  color: white;
+  margin: 10px;
+}
+
+/* DroneDetails.css */
+add-drone-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: none; /* Initially hidden */
+}
+
+.add-drone-card.show {
+  display: block; /* Show the card */
+}
+.add-drone-card input {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-drone-card button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-drone-card button:hover {
+  background-color: #0056b3;
+}
+
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure the popup is on top */
+}
+
+.popup-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 50%;
+}
+
+.popup-card label {
+  display: inline-block;
+  margin-bottom: 5px; /* Add some space between label and input */
+  padding: 10px;
+}
+
+.popup-card input{
+  width: 20%;
+  padding: 10px;
+  /* margin-top: 5px;
+  margin-bottom: 15px; */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.popup-card button {
+  padding: 10px 20px ;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0; /* Light grey background for the whole page */
+}
+
+.map-container .map {
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
