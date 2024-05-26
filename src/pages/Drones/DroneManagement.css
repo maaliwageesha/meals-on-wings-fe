@@ -1,0 +1,112 @@
+/* DroneManagement.css */
+.drone-management {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+/* General styling for the menu */
+.menu {
+  display: flex;
+  justify-content: space-around;
+  background-color: #6f636300;
+  padding: 10px;
+}
+
+.menu button {
+  background: none;
+  padding: 10px;
+  color: rgb(8, 8, 8);
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s, font-weight 0.3s;
+  border: none; /* Remove the border */
+  outline: none; /* Remove the outline */
+}
+
+.menu button:hover {
+  color: rgb(244, 181, 10);
+  font-weight: bold; /* Make the text bold */
+}
+
+/* Additional styling for active menu button if needed */
+.menu button.active {
+  color: rgb(244, 181, 10);
+  font-weight: bold;
+}
+.content {
+  width: 80%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup-message-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-message {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-message p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.popup-message button {
+  padding: 10px 20px;
+  border: none;
+  background: #333;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.popup-message button:hover {
+  background: #555;
+}
+

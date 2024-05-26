@@ -1,40 +1,166 @@
-.delivery-map-container {
-  width: 100%;
-  height: 100vh;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #f4f4f9;
+body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
   color: #333;
 }
 
-.delivery-select {
+nav {
+  background-color: #333;
+}
+
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.menu li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.menu li:last-child {
+  margin-right: 0;
+}
+
+.menu li a {
   display: block;
-  margin: 0 auto 20px auto;
-  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
   font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
-.delivery-info {
-  background-color: #fff;
+.menu li a:hover {
+  background-color: #555;
+}
+
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.menu-table th,
+.menu-table td {
   border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.menu-table th {
+  background-color: #f2f2f2;
+}
+
+.menu-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.menu-table select {
+  padding: 6px;
+}
+
+.menu-table button {
+  padding: 6px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 5px; /* Add space above and below the button */
+}
+
+.menu-table button:hover {
+  background-color: #0056b3;
+}
+
+/* Edit Card Styling */
+.edit-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
   padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  max-width: 600px;
-  margin: 0 auto 20px auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 400px;
 }
 
-.delivery-info p {
-  margin: 5px 0;
+.edit-card h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.delivery-info strong {
-  color: #555;
+.edit-card label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.edit-card input,
+.edit-card textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.edit-card button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-card button:hover {
+  background-color: #0056b3;
+}
+
+* Row Styles Based on Status */
+.available-row {
+background-color: #d7ffd9; /* Light green */
+}
+
+.sold-out-row {
+background-color: #ffd9d9; /* Light red */
+}
+
+.modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1000;
+}
+
+.modal-content {
+background: white;
+padding: 20px;
+border-radius: 5px;
+max-width: 500px;
+width: 100%;
+text-align: center;
 }

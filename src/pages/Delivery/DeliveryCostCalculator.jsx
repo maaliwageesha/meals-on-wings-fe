@@ -1,4 +1,4 @@
-// DeliveryCostCalculator.js
+
 
 const deliveryCostData = {
     base_cost: 5.0,

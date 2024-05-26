@@ -12,6 +12,7 @@ import { RestrauntOngoingOrders } from "./pages/restaurant/RestrauntOngoingOrder
 import { OrderSuccess } from "./pages/OrderSuccess/ordersucess.jsx";
 
 
+import { DroneManagement} from "./pages/Drones/DroneManagement.jsx"
 function App() {
   return (
     <AnimatePresence>
@@ -34,6 +35,7 @@ function App() {
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/ongoing-orders" element={<RestrauntOngoingOrders />} />
           <Route path="/success/:id" element={<OrderSuccess />} />
+          <Route path="/drone" element={<DroneManagement />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
