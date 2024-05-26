@@ -17,6 +17,8 @@ const deliveryCostData = {
   };
   
   const calculateDistance = (pickLoc, dropLoc) => {
+    console.log("pick",pickLoc)
+    console.log("dropLoc",dropLoc)
     const R = 6371; // Radius of the Earth in kilometers
     const dLat = (dropLoc.latitude - pickLoc.latitude) * (Math.PI / 180);
     const dLon = (dropLoc.longitude - pickLoc.longitude) * (Math.PI / 180);

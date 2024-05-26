@@ -317,9 +317,9 @@ export const categoryData = [
 ];
 
 export const ourTeamData = [
-  { id: 1, image: teamImage1, name: "William Smith", title: "Manager" },
-  { id: 2, image: teamImage2, name: "John Doe", title: "Chef" },
-  { id: 3, image: teamImage3, name: "Bradd  L.", title: "Chef" },
+  { id: 1, image: teamImage1, name: "Malidi Jinadasa", title: "Manager" },
+  { id: 2, image: teamImage2, name: "Shenuki Perera", title: "Chef" },
+  { id: 3, image: teamImage3, name: "Athul", title: "Chef" },
 ];
 
 export const blogData = [

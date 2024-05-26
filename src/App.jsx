@@ -9,6 +9,9 @@ import { AddMenuItem } from "./pages/restaurant/AddMenuItem.jsx";
 import { EditMenuItem } from "./pages/restaurant/EditMenuItem.jsx";
 import { OrderHistory } from "./pages/restaurant/OrderHistory.jsx"; 
 import { RestrauntOngoingOrders } from "./pages/restaurant/RestrauntOngoingOrders.jsx";
+import { OrderSuccess } from "./pages/OrderSuccess/ordersucess.jsx";
+
+
 import { DroneManagement} from "./pages/Drones/DroneManagement.jsx"
 function App() {
   return (
@@ -31,6 +34,7 @@ function App() {
           <Route path="/edit-menu-item/:id" element={<EditMenuItem />} />
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/ongoing-orders" element={<RestrauntOngoingOrders />} />
+          <Route path="/success/:id" element={<OrderSuccess />} />
           <Route path="/drone" element={<DroneManagement />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
