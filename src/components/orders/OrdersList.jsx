@@ -91,7 +91,7 @@ function OrdersList() {
       toast.error("Address field is mandatory")
       return;
     }
-    const pick_location={latitude:6.796388152839458,longitude:79.88796249927388}
+    const pick_location={latitude:-37.8115860744369,longitude:144.9720203541015}
     const {distance,cost} = calculateDeliveryCost(pick_location,fetchedPosition)
 
     const bestDrone = await getBestDroneId(totalWeight,distance)
