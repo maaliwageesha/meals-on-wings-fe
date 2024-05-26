@@ -1,10 +1,20 @@
 import React from 'react';
 import { useStripe } from '@stripe/react-stripe-js';
+import Button from '../Button';
 
-const CheckoutButton = () => {
+const CheckoutButton = ({createOrder2,price}) => {
     const stripe = useStripe();
 
+
+
+
     const handleClick = async () => {
+        let value=""
+        if(await createOrder2){
+            value =  await createOrder2()
+        }
+        console.log("Hi hui",value)
+        if(value){
         const { error } = await stripe.redirectToCheckout({
             lineItems: [
                 {
@@ -13,19 +23,24 @@ const CheckoutButton = () => {
                 },
             ],
             mode: 'payment',
-            successUrl: window.location.origin + '/success',
+            successUrl: window.location.origin + '/success/'+value,
             cancelUrl: window.location.origin + '/cancel',
         });
 
         if (error) {
             console.error('Error:', error);
         }
+    }
     };
 
+    const createOrder=()=>{
+        createOrder2()
+    }
+
     return (
-        <button onClick={handleClick}>
-            Checkout
-        </button>
+        <Button onClick={handleClick}>
+            Checkout {price}
+        </Button>
     );
 };
 

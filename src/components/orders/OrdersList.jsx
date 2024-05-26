@@ -5,6 +5,7 @@ import {
   deleteItem,
   getCart,
   getTotalCartPrise,
+  getTotalCartWeight,
 } from "../../redux/features/cartSlice";
 import { formatCurrency } from "../../utils/helpers";
 import { fetchAddress } from "../../redux/features/addressSlice";
@@ -21,7 +22,11 @@ import Empty from "../Empty";
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import StripeContainer from "../payments/StripeContainer";
-
+import calculateDeliveryCost from "../../pages/Delivery/DeliveryCostCalculator";
+import getBestDroneId from "../../utils/bestDroneCalculator";
+import firebase from "firebase/compat/app";
+import { addDoc, collection } from "firebase/firestore";
+import { app, firestore } from "../../firebase";
 
 const initialState = {
   name: "",
@@ -36,11 +41,16 @@ function OrdersList() {
   const user = useSelector(getUser);
   const cart = useSelector(getCart);
   const totalPrice = useSelector(getTotalCartPrise);
+  const totalWeight = useSelector(getTotalCartWeight);
 
   const [values, setValues] = useState(initialState);
   const { name, phone, address, error } = values;
 
   const [fetchedAddress, setFetchedAddress] = useState("");
+  const [fetchedPosition, setFetchedPosition] = useState();
+
+  
+
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -51,7 +61,9 @@ function OrdersList() {
     try {
       const action = await dispatch(fetchAddress());
       if (fetchAddress.fulfilled.match(action)) {
-        const { address } = action.payload;
+        const { address, position } = action.payload;
+        console.log(position)
+        setFetchedPosition(position)
         setFetchedAddress(address); // Update the local state with the fetched address
       }
     } catch (error) {
@@ -72,6 +84,60 @@ function OrdersList() {
     navigate("/");
   };
 
+
+  const addOrderToFirestore = async () => {
+
+    if(!fetchedAddress){
+      toast.error("Address field is mandatory")
+      return;
+    }
+    const pick_location={latitude:6.796388152839458,longitude:79.88796249927388}
+    const {distance,cost} = calculateDeliveryCost(pick_location,fetchedPosition)
+
+    const bestDrone = await getBestDroneId(totalWeight,distance)
+    const valuesArray = cart.map(item => ({
+      item: "/items/"+item.id,
+      quantity:item.item_quantity,
+    }));
+    
+
+    console.log("add detaisssss")
+    try {
+      const orderDocRef = await addDoc(collection(firestore, "orders"), {
+        customer: "/Customer_details/1QX7Os6FkU6TFVzrhcjl",
+        item_array: valuesArray,
+        order_date:  new Date(),
+        order_status: "pending",
+        restaurant: "/restaurant_details/5",
+        total_price: formatCurrency(totalPrice)
+      });
+      console.log("Order document written with ID: ", orderDocRef.id);
+ 
+      // Add delivery document using the order ID
+      const deliveryDocRef = await addDoc(collection(firestore, "deliveries"), {
+        delivery_cost: cost,
+        delivery_date_time:  new Date(),
+        delivery_status: "pending",
+        drone_assigned: bestDrone?"/drone_details/"+bestDrone:"/drone_details/URRAy31nbKuINNXqWIMOsF",
+        is_item_handed: false,
+        is_item_picked: false,
+        order: `/order/${orderDocRef.id}`,
+        drop_loc:fetchedPosition,
+        pick_loc:pick_location,
+        distance:distance,
+        // can we pass the rest_loc and delivery address here?
+      });
+
+      console.log("Delivery document written with ID: ", deliveryDocRef.id);
+      return deliveryDocRef.id
+    } catch (e) {
+      console.error("Error adding documents: ", e);
+    }
+
+  
+  };
+
+
   if (!user) return <NoUser />;
 
   if (!cart.length) return <Empty message="The is No Orders." />;
@@ -81,7 +147,7 @@ function OrdersList() {
       <SectionHead title={"Order Now"} showLink={false} />
       <div className="flex flex-col-reverse items-start gap-[20px] md:flex-row">
         <div className="w-full md:w-[50%]">
-          <form className="flex w-full flex-col items-center gap-[20px] p-[20px]">
+          <div className="flex w-full flex-col items-center gap-[20px] p-[20px]">
             <input
               className="input"
               type="text"
@@ -118,12 +184,12 @@ function OrdersList() {
             </div>
 
             {error && <p className="text-sm text-red-500">{error}</p>}
-            <Button onClick={handleSubmit}>
+            {/* <Button onClick={handleSubmit}>
               Order Now For{" "}
               <span className="underline"> {formatCurrency(totalPrice)}</span>
-            </Button>
-            <StripeContainer />
-          </form>
+            </Button> */}
+            <StripeContainer createOrder={addOrderToFirestore} price={formatCurrency(totalPrice)}/>
+          </div>
         </div>
 
         <div className="w-full md:w-[50%]">

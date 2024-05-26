@@ -5,7 +5,7 @@ import { firestore } from '../../firebase'
 import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore'
 import { Button, Card } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const MenuManagement = () => {
   const [items, setItems] = useState([])

@@ -12,22 +12,22 @@ function Footer() {
           <GridContainer>
             <div>
               <h5 className="mb-[5px] text-xl uppercase">Address</h5>
-              <p className="text-lightGray">Cairo, Egypt</p>
+              <p className="text-lightGray">Victoria, Australia</p>
             </div>
 
             <div>
-              <h5 className="mb-[5px] text-xl uppercase">Book A Table</h5>
+              <h5 className="mb-[5px] text-xl uppercase">Order A Meal</h5>
               <p className="text-lightGray">
-                Dogfood och Sliders foodtruck.
-                <br /> Under Om oss kan ni läsa
+                We deliver using drones.
+                <br /> Call us for more info
               </p>
-              <span className="text-yellow">(+20) 1151747091</span>
+              <span className="text-yellow">(+61) 1151747091</span>
             </div>
 
             <div>
               <h5 className="mb-[5px] text-xl uppercase">Opening Hour</h5>
-              <p className="text-lightGray">Monday – Friday: 8am – 4pm</p>
-              <p className="text-lightGray">Saturday: 9am – 5pm</p>
+              <p className="text-lightGray">Monday – Friday: 10am – 12pm</p>
+              <p className="text-lightGray">Saturday: 12am – 12am</p>
             </div>
 
             <div>
@@ -67,13 +67,13 @@ function Footer() {
         </div>
       </Container>
       <p className="bg-yellow p-[20px] text-textColor ">
-        Copyright © 2023{" "}
+        Copyright © 2024{" "}
         <Link
           to={"https://www.linkedin.com/in/the-mustafa-khaled/"}
           target="_blank"
           className="underline"
         >
-          Mustafa Khaled
+          Meals on Wings
         </Link>
         . All Rights Reserved.
       </p>

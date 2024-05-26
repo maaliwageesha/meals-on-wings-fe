@@ -6,7 +6,7 @@ function OurBurger({ flex }) {
     <SectionFlexContainer
       flex={flex}
       images={photo}
-      title={"From Texas with American Love"}
+      title={"From Victoria with Australian Love"}
       description={"About Our Food"}
     />
   );
