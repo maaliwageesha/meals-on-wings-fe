@@ -16,6 +16,8 @@ export const EditMenuItem = () => {
   const [itemWeight, setItemWeight] = useState('')
   const [currency, setCurrency] = useState('')
   const [itemPicture, setItemPicture] = useState('')
+  const [itemCategory, setItemCategory] = useState('')
+  const [itemAvailability, setItemAvailability] = useState('')
 
   useEffect(() => {
     if (item) {
@@ -25,6 +27,8 @@ export const EditMenuItem = () => {
       setItemWeight(item.item_weight)
       setCurrency(item.currency)
       setItemPicture(item.item_pic)
+      setItemCategory(item.category)
+      setItemAvailability(item.availability)
     }
   }, [item])
 
@@ -37,7 +41,9 @@ export const EditMenuItem = () => {
       !itemQuantity ||
       !itemWeight ||
       !currency ||
-      !itemPicture
+      !itemPicture ||
+      !itemCategory ||
+      !itemAvailability
     ) {
       alert('Please fill in all fields')
       return
@@ -52,6 +58,8 @@ export const EditMenuItem = () => {
         item_weight: itemWeight,
         currency: currency,
         item_pic: itemPicture,
+        category: itemCategory,
+        availability: itemAvailability
       })
       console.log('Document updated with ID: ', item.id)
       navigate('/menu-management')
@@ -119,7 +127,35 @@ export const EditMenuItem = () => {
               onChange={(e) => setItemPicture(e.target.value)}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Form.Group className="mb-3" controlId="formItemCategory">
+            <Form.Label>Item Category</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter item category"
+              value={itemCategory}
+              onChange={(e) => setItemCategory(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formItemAvailability">
+            <Form.Label>Item Availability</Form.Label>
+            <Form.Check
+              type="radio"
+              name='itemAvailability'
+              label='Sold Out'
+              value="Sold Out"
+              checked={itemAvailability === "Sold Out"}
+              onChange={(e) => setItemAvailability(e.target.value)}
+            />
+            <Form.Check
+              type="radio"
+              name='itemAvailability'
+              label='Available'
+              value="Available"
+              checked={itemAvailability === "Available"}
+              onChange={(e) => setItemAvailability(e.target.value)}
+            />
+          </Form.Group>
+          <Button variant="primary" style={{color: 'black'}} type="submit">
             Submit
           </Button>
         </Form>
