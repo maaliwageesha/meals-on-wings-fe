@@ -10,9 +10,8 @@ import { EditMenuItem } from "./pages/restaurant/EditMenuItem.jsx";
 import { OrderHistory } from "./pages/restaurant/OrderHistory.jsx"; 
 import { RestrauntOngoingOrders } from "./pages/restaurant/RestrauntOngoingOrders.jsx";
 import { OrderSuccess } from "./pages/OrderSuccess/ordersucess.jsx";
-
-
 import { DroneManagement} from "./pages/Drones/DroneManagement.jsx"
+
 function App() {
   return (
     <AnimatePresence>

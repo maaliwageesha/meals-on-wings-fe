@@ -91,8 +91,8 @@ const TrackDrones = () => {
             }}
           >
             <div>
-              <h2>Drone ID: {selectedDrone.id}</h2>
-              <p><strong>Name:</strong> {selectedDrone.name}</p>
+              {/* <h2>Drone ID: {selectedDrone.id}</h2> */}
+              {/* <p><strong>Name:</strong> {selectedDrone.name}</p> */}
               <p><strong>Latitude:</strong> {selectedDrone.current_loc.latitude}</p>
               <p><strong>Longitude:</strong> {selectedDrone.current_loc.longitude}</p>
               {/* Add other details as necessary */}

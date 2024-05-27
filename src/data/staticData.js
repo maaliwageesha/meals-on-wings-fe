@@ -63,7 +63,15 @@ export const headerLinks = [
     title: "Blog",
     to: "/blog",
   },
+
+  {
+    id: 5,
+    title: 'Drone',
+    to: "/drone",
+  }
 ];
+
+
 
 export const loginFormData = [
   {

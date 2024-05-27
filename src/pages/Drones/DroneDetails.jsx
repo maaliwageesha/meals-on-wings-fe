@@ -116,13 +116,13 @@ const DroneDetails = () => {
             value={newDroneData.fly_time}
             onChange={(e) => handleInputChange('fly_time', e.target.value)}
           />
-          {/* <label htmlFor="fly_time">Fly Time (h)</label> */}
-          {/* <input
+          <br/>
+          {<label htmlFor="Capacity">Capacity (g)</label> }
+          {<input
             type="text"
             value={newDroneData.id}
-            placeholder="Drone ID"
             onChange={(e) => handleInputChange('id', e.target.value)}
-          /> */}
+          /> }
           <br/>
           <label htmlFor="in_use">In Use</label>
           <input
@@ -165,6 +165,7 @@ const DroneDetails = () => {
           <tr>
             <th>Drone ID</th>
             <th>Battery Capacity</th>
+            <th>Capacity</th>
             <th>Fly Time</th>
             <th>In Use</th>
             <th>Model</th>
@@ -180,6 +181,13 @@ const DroneDetails = () => {
                   type="text"
                   value={displayValue(drone.battery_capacity)}
                   onChange={(e) => handleEdit(drone.id, 'battery_capacity', e.target.value)}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value={displayValue(drone.capacity)}
+                  onChange={(e) => handleEdit(drone.id, 'capacity', e.target.value)}
                 />
               </td>
               <td>
