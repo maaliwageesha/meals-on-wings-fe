@@ -23,7 +23,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import StripeContainer from "../payments/StripeContainer";
 import calculateDeliveryCost from "../../pages/Delivery/DeliveryCostCalculator";
-import getBestDroneId from "../../utils/bestDroneCalculator";
+import { allocateDrone } from "../../utils/bestDroneCalculator";
 import firebase from "firebase/compat/app";
 import { addDoc, collection } from "firebase/firestore";
 import { app, firestore } from "../../firebase";
@@ -63,7 +63,7 @@ function OrdersList() {
       if (fetchAddress.fulfilled.match(action)) {
         const { address, position } = action.payload;
         console.log(position)
-        setFetchedPosition(position)
+        setFetchedPosition({lat:position.latitude,lng:position.longitude})
         setFetchedAddress(address); // Update the local state with the fetched address
       }
     } catch (error) {
@@ -98,22 +98,35 @@ function OrdersList() {
       toast.error("Address field is mandatory")
       return;
     }
-    const pick_location={latitude:-37.8115860744369,longitude:144.9720203541015}
-    const {distance,cost} = calculateDeliveryCost(pick_location,fetchedPosition)
+    //    const pick_location={lat:-37.8115860744369,lng:144.9720203541015}
+    const storedLocation = localStorage.getItem("location");
+const pick_location = storedLocation ? JSON.parse(storedLocation) : {lat:-37.8115860744369,lng:144.9720203541015};
 
-    const bestDrone = await getBestDroneId(totalWeight,distance)
+    const {distance,cost} = await calculateDeliveryCost({latitude:pick_location.lat,longitude:pick_location.lng},{latitude:fetchedPosition.lat, longitude:fetchedPosition.lng})
+    let bestDrone; 
+    await allocateDrone(totalWeight, distance, pick_location, fetchedPosition)
+    .then(result => {
+      console.log("Allocated Drone:", result);
+      bestDrone = result
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      toast.error("No drones available at the moment for delivery")
+      return
+    });
+  
     const valuesArray = cart.map(item => ({
       item: "/items/"+item.id,
       quantity:item.item_quantity,
     }));
     
 
-    console.log("add detaisssss")
+    console.log("add detaisssss", distance)
     try {
       const orderDocRef = await addDoc(collection(firestore, "orders"), {
         customer: "/Customer_details/1QX7Os6FkU6TFVzrhcjl",
         item_array: valuesArray,
-        order_date:  storeDateAsString(new Date()),
+        order_date:  new Date(),
         order_status: "pending",
         restaurant: "/restaurant_details/5",
         total_price: formatCurrency(totalPrice)
@@ -123,15 +136,17 @@ function OrdersList() {
       // Add delivery document using the order ID
       const deliveryDocRef = await addDoc(collection(firestore, "deliveries"), {
         delivery_cost: cost,
-        delivery_date_time:  storeDateAsString(new Date()),
+        delivery_date_time:  new Date(),
         delivery_status: "pending",
-        drone_assigned: bestDrone?"/drone_details/"+bestDrone:"/drone_details/URRAy31nbKuINNXqWIMOsF",
+        drone_assigned: bestDrone.droneId?"/drone_details/"+bestDrone.droneId:"/drone_details/URRAy31nbKuINNXqWIMOsF",
         is_item_handed: false,
         is_item_picked: false,
         order: `/order/${orderDocRef.id}`,
-        drop_loc:fetchedPosition,
-        pick_loc:pick_location,
+        drop_loc:{latitude:fetchedPosition.lat, longitude:fetchedPosition.lng},
+        pick_loc:{latitude:pick_location.lat,longitude:pick_location.lng},
         distance:distance,
+        is_charge_required:bestDrone.chargeStationId?true:false,
+        charge_station:bestDrone.chargeStationId?{latitude:bestDrone.chargeStationId.lat,longitude:bestDrone.chargeStationId.lng}:""
         // can we pass the rest_loc and delivery address here?
       });
 

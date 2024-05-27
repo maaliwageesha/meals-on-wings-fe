@@ -4,7 +4,7 @@ const deliveryCostData = {
     base_cost: 5.0,
     cost_per_km: 2.0,
     distance_brackets: [
-      { min_distance_km: 1, max_distance_km: 5, fixed_cost: 10.0 },
+      { min_distance_km: 0, max_distance_km: 5, fixed_cost: 10.0 },
       { min_distance_km: 5, max_distance_km: 10, fixed_cost: 15.0 },
       { min_distance_km: 10, max_distance_km: 20, fixed_cost: 20.0 },
       { min_distance_km: 20, max_distance_km: 50, fixed_cost: 30.0 }
@@ -49,7 +49,7 @@ const deliveryCostData = {
     }else {
         cost += deliveryCostData.cost_per_km * distance;
     }
-  
+    console.log(cost)
     return { distance, cost };
   };
   
