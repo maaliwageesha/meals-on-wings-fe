@@ -37,6 +37,7 @@ function App() {
             <Route path="/ongoing-orders" element={<RestrauntOngoingOrders />} />
             <Route path="/success/:id" element={<OrderSuccess />} />
             <Route path="/drone" element={<DroneManagement />} />
+            <Route path="/res-dashboard" element={<RestaurantHome />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

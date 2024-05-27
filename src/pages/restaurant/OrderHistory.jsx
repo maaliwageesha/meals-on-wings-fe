@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 // import { Header } from '../../layouts/Header/Header'
 import { firestore } from '../../firebase'
 import { getDocs, collection, doc, getDoc } from 'firebase/firestore'
-import { Table } from 'react-bootstrap'
 import OrdersTable from '../../components/Restraunt/OrdrersTable'
+import { RestaurantHome } from './RestaurantHome'
 
 export const OrderHistory = () => {
   const [orders, setOrders] = useState([])
@@ -54,19 +54,21 @@ export const OrderHistory = () => {
 
   console.log(orders)
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>
+  // }
 
   return (
     <>
-      {/* <Header /> */}
-
-      <div className="container">
-        <OrdersTable orders={orders} status="pending" />
-        <OrdersTable orders={orders} status="pickedup" />
-        <OrdersTable orders={orders} status="delivered" />
-      </div>
+      <RestaurantHome />
+      {loading ? 
+        <div style={{textAlign: 'center'}}>Loading...</div> :
+        <div className="container">
+          <OrdersTable orders={orders} status="pending" />
+          <OrdersTable orders={orders} status="pickedup" />
+          <OrdersTable orders={orders} status="delivered" />
+        </div>
+      }
     </>
   )
 }

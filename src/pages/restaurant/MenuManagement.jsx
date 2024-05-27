@@ -6,6 +6,7 @@ import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore'
 import { Button, Card } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { RestaurantHome } from './RestaurantHome'
 
 export const MenuManagement = () => {
   const [items, setItems] = useState([])
@@ -38,8 +39,7 @@ export const MenuManagement = () => {
 
   return (
     <>
-      {/* <Header /> */}
-
+      <RestaurantHome />
       <div className="container">
         <Button
           variant="dark"
