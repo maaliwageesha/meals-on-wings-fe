@@ -44,30 +44,42 @@ export const headerLinks = [
     id: 1,
     title: "Home",
     to: "/",
+    auth:"no"
   },
 
   {
     id: 2,
     title: "Menu",
     to: "/menu",
+    auth:"no"
   },
 
   {
     id: 3,
     title: "About US",
     to: "/about",
+    auth:"no"
   },
 
   {
     id: 4,
     title: "Blog",
     to: "/blog",
+    auth:"no"
   },
 
   {
     id: 5,
     title: 'Drone',
     to: "/drone",
+    auth:"regulator"
+  },
+
+  {
+    id: 5,
+    title: 'Menu Management',
+    to: "/menu-management",
+    auth:"restaurant_admin"
   }
 ];
 

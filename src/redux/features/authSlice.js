@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 // Initial state from local storage, if available
 const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -19,6 +20,7 @@ const authSlice = createSlice({
     logoutUser: (state) => {
       state.user = null;
       localStorage.removeItem("user");
+   
     },
   },
 });
@@ -27,3 +29,6 @@ export const { setUser, logoutUser } = authSlice.actions;
 export default authSlice.reducer;
 
 export const getUser = (state) => state.auth.user;
+
+// Selector to get user type
+export const getUserType = (state) => state.auth.user?.userType || null;

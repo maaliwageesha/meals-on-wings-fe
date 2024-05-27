@@ -56,21 +56,55 @@ function OrdersList() {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const getCurrentPosition = () => {
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            resolve({ latitude, longitude });
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      } else {
+        reject(new Error('Geolocation is not supported by this browser.'));
+      }
+    });
+  };
+  
+  // const handleGetAddress = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const action = await dispatch(fetchAddress());
+  //     if (fetchAddress.fulfilled.match(action)) {
+  //       const { address, position } = action.payload;
+  //       console.log(position)
+  //       setFetchedPosition({lat:position.latitude,lng:position.longitude})
+  //       setFetchedAddress(address); // Update the local state with the fetched address
+  //     }
+  //   } catch (error) {
+  //     setValues({ ...values, error: error });
+  //   }
+  // };
   const handleGetAddress = async (e) => {
     e.preventDefault();
     try {
+      const position = await getCurrentPosition();
+      console.log(position);
+      setFetchedPosition({ lat: position.latitude, lng: position.longitude });
+  
       const action = await dispatch(fetchAddress());
       if (fetchAddress.fulfilled.match(action)) {
-        const { address, position } = action.payload;
-        console.log(position)
-        setFetchedPosition({lat:position.latitude,lng:position.longitude})
+        const { address } = action.payload;
         setFetchedAddress(address); // Update the local state with the fetched address
       }
     } catch (error) {
-      setValues({ ...values, error: error });
+      setValues({ ...values, error: error.message });
     }
   };
-
+  
   // On submit the form
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -3,14 +3,17 @@ import { logoutUser } from "../redux/features/authSlice";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 function ConfirmLogout({ setShowConfirmDelete }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const modalRef = useOutsideClick(() => setShowConfirmDelete(false));
 
   const handleLogout = () => {
     dispatch(logoutUser());
     setShowConfirmDelete(false);
+    navigate('/')
   };
 
   return (

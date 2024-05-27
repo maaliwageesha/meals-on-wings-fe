@@ -1,23 +1,23 @@
-// this is a form for create or log in an account
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore"; // Import Firestore functions
+import { auth, firestore } from "../firebase"; // Make sure to initialize Firestore in your firebase.js file
 import { setUser } from "../redux/features/authSlice";
 import { loginFormData } from "../data/staticData";
 import { useNavigate } from "react-router-dom";
 
 import Container from "./Container";
-
 import Button from "./Button";
 import toast from "react-hot-toast";
 
 const initialState = {
   email: "",
   password: "",
+  userType: "customer", // Default user type
   error: "",
 };
 
@@ -27,24 +27,25 @@ function AuthForm() {
 
   const [isLogin, setIsLogin] = useState(true);
   const [values, setValues] = useState(initialState);
-  const { email, password, error } = values;
+  const { email, password, userType, error } = values;
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const handleUserTypeChange = (e) => {
+    setValues({ ...values, userType: e.target.value });
+  };
+
   const createAccount = async () => {
     try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
       const { uid, email: userEmail } = user;
-      const serializedUser = { uid, email: userEmail };
+      const serializedUser = { uid, email: userEmail, userType };
+      await setDoc(doc(firestore, "users", uid), { userType }); // Save user type to Firestore
       dispatch(setUser(serializedUser));
       setValues(initialState);
-      toast.success("Account successfully Created.");
+      toast.success("Account successfully created.");
       navigate("/");
     } catch (error) {
       setValues({ ...values, error: error.message });
@@ -55,11 +56,21 @@ function AuthForm() {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       const { uid, email: userEmail } = user;
-      const serializedUser = { uid, email: userEmail };
+      const userDoc = await getDoc(doc(firestore, "users", uid)); // Retrieve user type from Firestore
+      const userType = userDoc.exists() ? userDoc.data().userType : "customer";
+      const serializedUser = { uid, email: userEmail, userType };
       dispatch(setUser(serializedUser));
+      localStorage.setItem("userType", userType); // Save user type to local storage
       setValues(initialState);
       toast.success("Logged in successfully.");
-      navigate("/");
+      if(userType=="customer"){
+        navigate("/");
+      }else if(userType=="regulator"){
+        navigate("/drone");
+      }else{
+        navigate("/res-dashboard");
+      }
+     
     } catch (error) {
       setValues({ ...values, error: error.message });
     }
@@ -106,6 +117,23 @@ function AuthForm() {
               </div>
             );
           })}
+
+          {!isLogin && (
+            <div className="mb-[10px] flex w-full flex-col items-start gap-[5px]">
+              <label className="font-bold" htmlFor="userType">User Type:</label>
+              <select
+                className="input"
+                id="userType"
+                name="userType"
+                value={userType}
+                onChange={handleUserTypeChange}
+              >
+                <option value="regulator">Regulator</option>
+                <option value="restaurant_admin">Restaurant Admin</option>
+                <option value="customer">Customer</option>
+              </select>
+            </div>
+          )}
 
           <Button onClick={handleAuthClick}>
             {isLogin ? "Log in" : "Create an account"}
