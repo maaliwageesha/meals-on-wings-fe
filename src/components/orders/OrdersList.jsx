@@ -84,14 +84,6 @@ function OrdersList() {
     navigate("/");
   };
 
-  const storeDateAsString = async (date) => {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-    const year = date.getFullYear();
-    const formattedDate = `${day}/${month}/${year}`;
-    return formattedDate
-  };
-
   const addOrderToFirestore = async () => {
 
     if(!fetchedAddress){
@@ -113,7 +105,7 @@ function OrdersList() {
       const orderDocRef = await addDoc(collection(firestore, "orders"), {
         customer: "/Customer_details/1QX7Os6FkU6TFVzrhcjl",
         item_array: valuesArray,
-        order_date:  storeDateAsString(new Date()),
+        order_date:  new Date(),
         order_status: "pending",
         restaurant: "/restaurant_details/5",
         total_price: formatCurrency(totalPrice)
@@ -123,7 +115,7 @@ function OrdersList() {
       // Add delivery document using the order ID
       const deliveryDocRef = await addDoc(collection(firestore, "deliveries"), {
         delivery_cost: cost,
-        delivery_date_time:  storeDateAsString(new Date()),
+        delivery_date_time:  new Date(),
         delivery_status: "pending",
         drone_assigned: bestDrone?"/drone_details/"+bestDrone:"/drone_details/URRAy31nbKuINNXqWIMOsF",
         is_item_handed: false,

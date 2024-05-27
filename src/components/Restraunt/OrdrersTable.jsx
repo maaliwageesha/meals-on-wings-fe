@@ -34,7 +34,7 @@ const OrdersTable = ({ orders, status }) => {
                           <div key={index}>{item.item_quantity}</div>
                         ))}
                       </td>
-                      <td>{order.order_date}</td>
+                      <td>{order.order_date && new Date(order.order_date.seconds * 1000).toLocaleString()}</td>
                       <td>{order.order_status}</td>
                       <td>
                         {order.restaurant_details?.rest_name || 'Loading...'}
