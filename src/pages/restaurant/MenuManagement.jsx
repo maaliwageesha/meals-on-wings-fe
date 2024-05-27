@@ -43,7 +43,7 @@ export const MenuManagement = () => {
       <div className="container">
         <Button
           variant="dark"
-          style={{ marginBottom: '2rem' }}
+          style={{ marginBottom: '2rem', color: 'black' }}
           onClick={() => navigate('/add-menu-item')}
         >
           Add Menu Items
@@ -59,44 +59,49 @@ export const MenuManagement = () => {
                   style={{ height: '250px', objectFit: 'cover' }}
                 />
                 <Card.Body>
-                  <Card.Title
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
-                  >
+                  <Card.Title style={{ display: 'flex', justifyContent: 'space-between' }}>
                     {item.item_name}{' '}
                     <span>
                       {item.item_price} {item.currency}
                     </span>
                   </Card.Title>
                   <Card.Text>
-                    Item Quantity: {item.item_quantity}, Item Weight:{' '}
-                    {item.item_weight}
+                    Item Quantity: {item.item_quantity} <br/>
+                    Item Weight: {item.item_weight} <br/>
+                    Item Category: {item.category ? item.category : 'Miscellaneous'} <br/>
+                    Availability: {item.availability}
                   </Card.Text>
                   {/* <Card.Text>Item Weight: {item.item_weight}</Card.Text> */}
-                  <Button
-                    variant="success"
-                    style={{ marginRight: '20px' }}
-                    onClick={() =>
-                      navigate(`/edit-menu-item/${item.id}`, {
-                        state: {
-                          id: item.id,
-                          item_name: item.item_name,
-                          item_price: item.item_price,
-                          item_quantity: item.item_quantity,
-                          item_weight: item.item_weight,
-                          currency: item.currency,
-                          item_pic: item.item_pic,
-                        },
-                      })
-                    }
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    Delete
-                  </Button>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Button
+                      variant="success"
+                      style={{ color: 'black' }}
+                      onClick={() =>
+                        navigate(`/edit-menu-item/${item.id}`, {
+                          state: {
+                            id: item.id,
+                            item_name: item.item_name,
+                            item_price: item.item_price,
+                            item_quantity: item.item_quantity,
+                            item_weight: item.item_weight,
+                            currency: item.currency,
+                            item_pic: item.item_pic,
+                            category: item.category,
+                            availability: item.availability,
+                          },
+                        })
+                      }
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="danger"
+                      style={{ color: 'black' }}
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
                 </Card.Body>
               </Card>
             )

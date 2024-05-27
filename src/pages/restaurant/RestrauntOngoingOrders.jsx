@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 // import { Header } from '../../layouts/Header/Header'
 import { firestore } from '../../firebase'
 import { getDocs, collection, doc, getDoc } from 'firebase/firestore'
-import { Table } from 'react-bootstrap'
 import OrdersTable from '../../components/Restraunt/OrdrersTable'
 
 export const RestrauntOngoingOrders = () => {
@@ -54,17 +53,16 @@ export const RestrauntOngoingOrders = () => {
 
   console.log(orders)
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
 
   return (
     <>
       {/* <Header /> */}
-
-      <div className="container">
-        <OrdersTable orders={orders} status="pending" />
-      </div>
+      {loading ? 
+        <div>Loading...</div> :
+        <div className="container">
+          <OrdersTable orders={orders} status="pending" />
+        </div>
+      }
     </>
   )
 }

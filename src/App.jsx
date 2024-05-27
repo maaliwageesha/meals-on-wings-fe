@@ -12,6 +12,8 @@ import { RestrauntOngoingOrders } from "./pages/restaurant/RestrauntOngoingOrder
 import { OrderSuccess } from "./pages/OrderSuccess/ordersucess.jsx";
 import { DroneManagement} from "./pages/Drones/DroneManagement.jsx"
 
+import { RestaurantHome } from "./pages/restaurant/RestaurantHome.jsx";
+
 function App() {
   return (
     <AnimatePresence>
@@ -27,14 +29,14 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/delv" element={<Deliveries/>}/>
-          <Route path="/maps" element={<DeliveryMap/>}/>
-          <Route path="/menu-management" element={<MenuManagement />} />
-          <Route path="/add-menu-item" element={<AddMenuItem />} />
-          <Route path="/edit-menu-item/:id" element={<EditMenuItem />} />
-          <Route path="/order-history" element={<OrderHistory />} />
-          <Route path="/ongoing-orders" element={<RestrauntOngoingOrders />} />
-          <Route path="/success/:id" element={<OrderSuccess />} />
-          <Route path="/drone" element={<DroneManagement />} />
+            <Route path="/maps" element={<DeliveryMap/>}/>
+            <Route path="/menu-management" element={<MenuManagement />} />
+            <Route path="/add-menu-item" element={<AddMenuItem />} />
+            <Route path="/edit-menu-item/:id" element={<EditMenuItem />} />
+            <Route path="/order-history" element={<OrderHistory />} />
+            <Route path="/ongoing-orders" element={<RestrauntOngoingOrders />} />
+            <Route path="/success/:id" element={<OrderSuccess />} />
+            <Route path="/drone" element={<DroneManagement />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
