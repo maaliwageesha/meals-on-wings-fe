@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { firestore } from '../../firebase'
 import { getDocs, collection, doc, getDoc } from 'firebase/firestore'
 import OrdersTable from '../../components/Restraunt/OrdrersTable'
+import { RestaurantHome } from './RestaurantHome'
 
 export const RestrauntOngoingOrders = () => {
   const [orders, setOrders] = useState([])
@@ -56,9 +57,9 @@ export const RestrauntOngoingOrders = () => {
 
   return (
     <>
-      {/* <Header /> */}
+      <RestaurantHome />
       {loading ? 
-        <div>Loading...</div> :
+        <div style={{textAlign: 'center'}}>Loading...</div> :
         <div className="container">
           <OrdersTable orders={orders} status="pending" />
         </div>

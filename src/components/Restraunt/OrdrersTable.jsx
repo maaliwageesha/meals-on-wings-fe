@@ -1,8 +1,22 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
+import { firestore } from '../../firebase'
+import { doc, updateDoc } from 'firebase/firestore'
 
 const OrdersTable = ({ orders, status }) => {
-
+  const btnStyle = {border: '1px solid black', padding: '5px', backgroundColor: '#bbb'}
+  const updateStatus = async (orderId, newStatus) => {
+    try {
+      const docRef = doc(firestore, 'orders', orderId)
+      await updateDoc(docRef, {
+        order_status: newStatus
+      })
+      // Reload the page to reflect the change
+      window.location.reload();
+    } catch (e) {
+      console.error('Error updating document: ', e)
+    }
+  }
   const getTable = ()=>{
     if (status === 'pending') {
       return (
@@ -18,6 +32,7 @@ const OrdersTable = ({ orders, status }) => {
                 <th>Order Status</th>
                 <th>Restaurant</th>
                 <th>Total Price</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -40,6 +55,9 @@ const OrdersTable = ({ orders, status }) => {
                         {order.restaurant_details?.rest_name || 'Loading...'}
                       </td>
                       <td>{order.total_price}</td>
+                      <td>
+                        <button style={btnStyle} onClick={() => updateStatus(order.id, 'pickedup')}>Mark as Picked Up</button>  
+                      </td>
                     </tr>
                   )
               )}
@@ -62,6 +80,7 @@ const OrdersTable = ({ orders, status }) => {
                 <th>Order Status</th>
                 <th>Restaurant</th>
                 <th>Total Price</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -78,12 +97,15 @@ const OrdersTable = ({ orders, status }) => {
                           <div key={index}>{item.item_quantity}</div>
                         ))}
                       </td>
-                      <td>{order.order_date}</td>
+                      <td>{order.order_date && new Date(order.order_date.seconds * 1000).toLocaleString()}</td>
                       <td>{order.order_status}</td>
                       <td>
                         {order.restaurant_details?.rest_name || 'Loading...'}
                       </td>
                       <td>{order.total_price}</td>
+                      <td>
+                        <button style={btnStyle} onClick={() => updateStatus(order.id, 'delivered')}>Mark as Delivered</button>  
+                      </td>
                     </tr>
                   )
               )}
@@ -122,7 +144,7 @@ const OrdersTable = ({ orders, status }) => {
                           <div key={index}>{item.item_quantity}</div>
                         ))}
                       </td>
-                      <td>{order.order_date}</td>
+                      <td>{order.order_date && new Date(order.order_date.seconds * 1000).toLocaleString()}</td>
                       <td>{order.order_status}</td>
                       <td>
                         {order.restaurant_details?.rest_name || 'Loading...'}
