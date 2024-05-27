@@ -1,4 +1,4 @@
-import photo from "../../assets/shipper.png";
+import photo from "../../assets/21.jpg";
 import SectionFlexContainer from "../SectionFlexContainer";
 
 function ChooseWhatYouWant() {
