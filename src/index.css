@@ -26,3 +26,23 @@ body {
     @apply w-full rounded-full border border-lightGray bg-gray px-[10px] py-[8px] outline-none placeholder:text-sm;
   }
 }
+
+.order-header{
+  font-weight: 500;
+  font-size: 25px;
+  padding-bottom: 30px;
+}
+
+.order-label{
+  font-weight: 600;
+  font-size: 18px;
+  padding-bottom: 10px;
+  font-family: 'poppins';
+}
+
+.order-value{
+  font-weight: 400;
+  font-size: 16px;
+
+  color: rgb(56, 53, 53);
+}
