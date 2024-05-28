@@ -17,6 +17,9 @@ export const RestaurantHome = () => {
           <li>
             <Link to="/ongoing-orders">Ongoing Orders</Link>
           </li>
+          <li>
+            <Link to="/maps">Delivery Maps</Link>
+          </li>
         </ul>
       </nav>
     </div>
