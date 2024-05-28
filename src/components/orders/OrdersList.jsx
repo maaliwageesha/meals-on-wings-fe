@@ -145,7 +145,10 @@ const pick_location = storedLocation ? JSON.parse(storedLocation) : {lat:-37.811
       item: "/items/"+item.id,
       quantity:item.item_quantity,
     }));
-    
+    if(!bestDrone.droneId){
+      //toast.error("Address field is mandatory")
+      return;
+    }
 
     console.log("add detaisssss", distance)
     try {

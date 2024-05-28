@@ -18,10 +18,7 @@ function SectionFlexContainer({
         <p className="text-yellow">{description}</p>
         <h1 className="text-4xl md:text-2xl">{title}</h1>
         <p className="my-[10px] text-lightGray">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab vero
-          dolores delectus tempora ad, dolorum deserunt, sequi saepe
-          voluptatibus illo tempore soluta reprehenderit repellat ut amet a non
-          nemo ducimus!
+        Our menu is a fusion of global inspirations and gourmet craftsmanship. Each dish is crafted with the finest ingredients, ensuring a burst of flavor in every bite. From juicy burgers to spicy Mexican dishes, savory Asian cuisine, and fresh Mediterranean delights, our diverse menu offers something for everyone, all delivered straight to you by our state-of-the-art drones
         </p>
         <Link to={"/menu"}>
           <Button>Order Now</Button>

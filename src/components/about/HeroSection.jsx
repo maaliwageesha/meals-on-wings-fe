@@ -14,15 +14,11 @@ function HeroSection() {
             Best burger ideas & traditions from the whole world
           </h1>
           <p className="my-[10px] text-lightGray">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab vero
-            dolores delectus tempora ad, dolorum deserunt, sequi saepe
-            voluptatibus illo tempore soluta reprehenderit repellat ut amet a
-            non nemo ducimus!
+          Our journey began with a simple idea: to bring the world’s best foods to your doorstep using the latest in drone technology. Inspired by global flavors and driven by a love for culinary innovation, we created meals on wings to offer a unique dining experience that combines delicious food with unparalleled convenience
           </p>
           <p className="my-[30px] text-lightGray">
-            Mauris tempus erat laoreet turpis lobortis, eu tincidunt erat
-            fermentum. Aliquam non tincidunt urna. Integer tincidunt nec nisl
-            vitae ullamcorper. Proin sed ultrices erat.
+          We provide a behind-the-scenes look at how your drone delivery system works. Include details on the technology, logistics, and the journey from kitchen to doorstep.
+
           </p>
           <Link to={"/menu"}>
             <Button>Order Now</Button>

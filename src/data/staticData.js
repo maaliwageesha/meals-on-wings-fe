@@ -1,10 +1,10 @@
 import { CiCoffeeCup, CiIceCream, CiPizza, CiGrid41 } from "react-icons/ci";
 import { FaFish, FaHamburger } from "react-icons/fa";
 
-import imageSlider1 from "../assets/slider1.jpg";
-import imageSlider2 from "../assets/slider2.jpg";
+import imageSlider1 from "../assets/9.jpg";
+import imageSlider2 from "../assets/8.jpg";
 import imageSlider3 from "../assets/slider3.jpg";
-import imageSlider4 from "../assets/slider4.jpg";
+import imageSlider4 from "../assets/10.jpg";
 
 import categoryImage1 from "../assets/Baked.png";
 import categoryImage2 from "../assets/Burger.png";
@@ -61,12 +61,12 @@ export const headerLinks = [
     auth:"no"
   },
 
-  {
-    id: 4,
-    title: "Blog",
-    to: "/blog",
-    auth:"no"
-  },
+  // {
+  //   id: 4,
+  //   title: "Blog",
+  //   to: "/blog",
+  //   auth:"no"
+  // },
 
   {
     id: 5,
@@ -408,7 +408,7 @@ export const ClientsData = [
     id: 1,
     description:
       "“Forget the trendy pizza shops, This hidden spot makes the best New York-style pizza slice in naples”",
-    name: "Stephen Tindle",
+    name: "Senuki Jinadasa",
     image: clientImage1,
   },
 

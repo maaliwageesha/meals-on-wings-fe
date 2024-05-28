@@ -12,10 +12,8 @@ function BlogItem({ blog }) {
           {title}
         </h2>
         <p className="my-[10px] text-lightGray">
-          Ac haca ullamcorper donec ante habi tasse donec imperdiet eturpis
-          varius per a augue magna hac. Nec hac et vestibulum duis a tincidunt
-          per a aptent interdum purus feugiat a id aliquet erat himenaeos nunc
-          torquent euismod adipiscing adipiscing dui gravida justo.
+        Our mission is to provide a seamless and innovative dining experience that redefines convenience and quality. We aim to deliver exceptional food inspired by global flavors right to your doorstep, faster and fresher than ever before.
+.
         </p>
       </div>
     </div>

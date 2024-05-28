@@ -22,7 +22,7 @@ function HomeSlider() {
     });
   };
   return (
-    <div className="relative h-[60vh] w-full">
+    <div className="relative h-[80vh] w-full">
       <div className="flex h-full w-full overflow-hidden">
         {sliderImages.map((url) => (
           <img

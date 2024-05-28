@@ -3,7 +3,7 @@ import "swiper/css/navigation";
 import "swiper/css";
 import { ClientsData } from "../../data/staticData";
 
-import photo from "../../assets/ratings.jpg";
+import photo from "../../assets/4.jpg";
 
 function ClientRatings() {
   return (
@@ -29,7 +29,7 @@ function ClientRatings() {
 
               <p className="text-lightGray">{r.description}</p>
 
-              <h3 className="font-bold uppercase">{r.name}</h3>
+              <h3 className="font-bold uppercase" style={{color:"white"}}>{r.name}</h3>
             </div>
           </SwiperSlide>
         );

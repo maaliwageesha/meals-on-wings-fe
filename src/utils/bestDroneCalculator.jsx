@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { firestore } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -43,6 +44,8 @@ export const allocateDrone = async (itemWeight, distance, startPoint, endPoint) 
   const suitableDrones = drones.filter(drone => drone.capacity >= itemWeight && drone.in_use);
 
   if (suitableDrones.length === 0) {
+    toast.error("No suitable drones at the moment")
+
     throw new Error("No suitable drones available.");
   }
 
@@ -83,6 +86,8 @@ export const allocateDrone = async (itemWeight, distance, startPoint, endPoint) 
   }
 
   if (!selectedDrone) {
+    toast.error("No suitable drones available after considering battery constraints")
+
     throw new Error("No suitable drones available after considering battery constraints.");
   }
 

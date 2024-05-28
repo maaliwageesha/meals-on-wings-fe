@@ -49,14 +49,14 @@ function Footer() {
 
             <div className="flex flex-row items-center justify-center gap-[10px] text-xl md:flex-col md:justify-start">
               <Link
-                to={"https://github.com/mustafa-khaled"}
+                to={"https://github.com/maaliwageesha/meals-on-wings-fe"}
                 target="_blank"
                 className="hover:text-yellow"
               >
                 <ImGithub />
               </Link>
               <Link
-                to={"https://www.linkedin.com/in/the-mustafa-khaled/"}
+                to={"https://d10jmngyc36sqh.cloudfront.net/"}
                 target="_blank"
                 className="hover:text-yellow"
               >
@@ -69,7 +69,7 @@ function Footer() {
       <p className="bg-yellow p-[20px] text-textColor ">
         Copyright © 2024{" "}
         <Link
-          to={"https://www.linkedin.com/in/the-mustafa-khaled/"}
+          to={"https://d10jmngyc36sqh.cloudfront.net/"}
           target="_blank"
           className="underline"
         >
