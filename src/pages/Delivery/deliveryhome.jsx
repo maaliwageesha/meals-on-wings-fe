@@ -116,7 +116,7 @@ export const Deliveries = () => {
           {deliveries.map((delivery, index) => (
             <tr key={index}>
               <td>{delivery.delivery_cost}</td>
-              <td>{delivery.delivery_date_time}</td>
+              <td>{(delivery.delivery_date_time.seconds * 1000).toLocaleString()}</td>
               <td>{delivery.delivery_status}</td>
               <td>{typeof delivery.drone_assigned === 'string' ? delivery.drone_assigned : (delivery.drone_assigned && delivery.drone_assigned.id) || 'N/A'}</td>
               <td>{delivery.is_item_handed ? 'Yes' : 'No'}</td>

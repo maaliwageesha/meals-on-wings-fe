@@ -12,10 +12,7 @@ function BlogItem({ blog }) {
           {title}
         </h2>
         <p className="my-[10px] text-lightGray">
-          Ac haca ullamcorper donec ante habi tasse donec imperdiet eturpis
-          varius per a augue magna hac. Nec hac et vestibulum duis a tincidunt
-          per a aptent interdum purus feugiat a id aliquet erat himenaeos nunc
-          torquent euismod adipiscing adipiscing dui gravida justo.
+        Explore the evolution of food delivery and how drone technology is revolutionizing the industry. Discuss the benefits, challenges, and future prospects of drone deliveries.
         </p>
       </div>
     </div>

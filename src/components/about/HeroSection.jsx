@@ -14,15 +14,18 @@ function HeroSection() {
             Best burger ideas & traditions from the whole world
           </h1>
           <p className="my-[10px] text-lightGray">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab vero
-            dolores delectus tempora ad, dolorum deserunt, sequi saepe
-            voluptatibus illo tempore soluta reprehenderit repellat ut amet a
-            non nemo ducimus!
+          Our Story <br/>
+          Discover how our innovative approach to food delivery was born. Combining a passion for great burgers with cutting-edge technology, we set out to revolutionize the dining experience by delivering gourmet burgers straight to your door using drones.
+          <p className="my-[10px] text-lightGray">
+          <br/>Our Mission <br/>
+          Our mission is to provide a seamless and innovative dining experience that redefines convenience and quality. We aim to deliver exceptional burgers inspired by global flavors right to your doorstep, faster and fresher than ever before.
+          </p>
+          <p className="my-[10px] text-lightGray">
+          <br/>Our Technology<br/>
+          Explain the drone delivery system and how it enhances the customer experience by ensuring faster and fresher deliveries. Highlight the innovation and efficiency of this technology.
+          </p>
           </p>
           <p className="my-[30px] text-lightGray">
-            Mauris tempus erat laoreet turpis lobortis, eu tincidunt erat
-            fermentum. Aliquam non tincidunt urna. Integer tincidunt nec nisl
-            vitae ullamcorper. Proin sed ultrices erat.
           </p>
           <Link to={"/menu"}>
             <Button>Order Now</Button>
