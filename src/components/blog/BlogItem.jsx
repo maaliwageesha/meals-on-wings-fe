@@ -12,8 +12,7 @@ function BlogItem({ blog }) {
           {title}
         </h2>
         <p className="my-[10px] text-lightGray">
-        Our mission is to provide a seamless and innovative dining experience that redefines convenience and quality. We aim to deliver exceptional food inspired by global flavors right to your doorstep, faster and fresher than ever before.
-.
+        Explore the evolution of food delivery and how drone technology is revolutionizing the industry. Discuss the benefits, challenges, and future prospects of drone deliveries.
         </p>
       </div>
     </div>

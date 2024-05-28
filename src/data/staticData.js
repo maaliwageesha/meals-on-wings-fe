@@ -345,60 +345,60 @@ export const ourTeamData = [
 export const blogData = [
   {
     id: 1,
-    title: "10 Reasons To Do A Digital Detox Challenge",
+    title: "The Future of Food Delivery: How Drone Technology is Changing the Game",
     image: blogImage1,
   },
   {
     id: 2,
-    title: "The Ultimate Hangover Burger: Egg in a Hole Burger Grilled Cheese",
+    title: "Global Flavors Delivered to Your Doorstep: Exploring Our Diverse Menu",
     image: blogImage2,
   },
 
   {
     id: 3,
-    title: "Traditional Soft Pretzels with Sweet Beer Cheese",
+    title: "Behind the Scenes: A Day in the Life of a Drone",
     image: blogImage3,
   },
 
   {
     id: 4,
-    title: "My Favorite Easy Black Pizza Toast Recipe",
+    title: "Sustainability in Food Delivery: How Drones Reduce Our Carbon Footprint",
     image: blogImage4,
   },
 
   {
     id: 5,
-    title: "6 Ingredient Vegan Cinnamon Rolls",
+    title: "Customer Stories: How Our App Makes Life Easier",
     image: blogImage5,
   },
 
   {
     id: 6,
-    title: "Crispy Stovetop Roasted Red Potatoes",
+    title: "Meet the Chefs: The Culinary Experts Behind Our Delicious Dishes",
     image: blogImage6,
   },
 
   {
     id: 7,
-    title: "Easy 4 Ingredient Hatch Salsa Verde",
+    title: "Safety First: Ensuring Safe and Reliable Drone Deliveries",
     image: blogImage7,
   },
 
   {
     id: 8,
-    title: "Totoro Pancake Tutorial: Easy Totoro Pancake Food Art",
+    title: "Cooking Tips and Recipes from Our Kitchen to Yours",
     image: blogImage8,
   },
 
   {
     id: 9,
-    title: "How to Make Jammy Soft Boiled Eggs at Home",
+    title: "Tech Talk: Innovations in Drone Delivery Technology",
     image: blogImage9,
   },
 
   {
     id: 10,
-    title: "Traditional Soft Pretzels with Sweet Beer Cheese",
+    title: "The Impact of COVID-19 on Food Delivery Trends",
     image: blogImage10,
   },
 ];

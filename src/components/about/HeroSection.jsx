@@ -14,11 +14,18 @@ function HeroSection() {
             Best burger ideas & traditions from the whole world
           </h1>
           <p className="my-[10px] text-lightGray">
-          Our journey began with a simple idea: to bring the world’s best foods to your doorstep using the latest in drone technology. Inspired by global flavors and driven by a love for culinary innovation, we created meals on wings to offer a unique dining experience that combines delicious food with unparalleled convenience
+          Our Story <br/>
+          Discover how our innovative approach to food delivery was born. Combining a passion for great burgers with cutting-edge technology, we set out to revolutionize the dining experience by delivering gourmet burgers straight to your door using drones.
+          <p className="my-[10px] text-lightGray">
+          <br/>Our Mission <br/>
+          Our mission is to provide a seamless and innovative dining experience that redefines convenience and quality. We aim to deliver exceptional burgers inspired by global flavors right to your doorstep, faster and fresher than ever before.
+          </p>
+          <p className="my-[10px] text-lightGray">
+          <br/>Our Technology<br/>
+          Explain the drone delivery system and how it enhances the customer experience by ensuring faster and fresher deliveries. Highlight the innovation and efficiency of this technology.
+          </p>
           </p>
           <p className="my-[30px] text-lightGray">
-          We provide a behind-the-scenes look at how your drone delivery system works. Include details on the technology, logistics, and the journey from kitchen to doorstep.
-
           </p>
           <Link to={"/menu"}>
             <Button>Order Now</Button>

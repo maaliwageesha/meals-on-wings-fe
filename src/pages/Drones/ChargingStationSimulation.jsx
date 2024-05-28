@@ -48,11 +48,12 @@ const ChargingStationSimulation = () => {
 
       console.log('id :', selectedDroneId);
       const circulatingDronesRef = collection(firestore, 'circulating_drones');
-      const droneRef = query(circulatingDronesRef, where('id', '==', `/drone_details/${selectedDroneId}`));
+      const droneRef = query(circulatingDronesRef, where('id', '==', `drone_details/${selectedDroneId}`));
+    // const droneRef = query(circulatingDronesRef, where('id', '==', selectedDroneId));
       const selectedDroneSnapshot = await getDocs(droneRef);
 
       console.log('circulatingDronesRef',circulatingDronesRef);
-      console.log('droneRef',droneRef.data);
+      console.log('droneRef',droneRef);
       console.log('selectedDroneSnapshot',selectedDroneSnapshot.empty);
 
 
@@ -203,7 +204,7 @@ const ChargingStationSimulation = () => {
       <div className="charging-stations">
         {chargingStations.map((station) => (
           <div className="station-card" key={station.id}>
-            <h3>Station {station.id}</h3>
+            <h3>Station: {station.id}</h3>
             <p>Location: {station.location.latitude}, {station.location.longitude}</p>
             <p>Slots: {station.slots.map((slot, index) => (
               <span key={index}>{slot ? 'Occupied' : 'Available'} </span>
